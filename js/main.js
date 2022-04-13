@@ -54,6 +54,20 @@ function game() {
   } else {
     console.log("You Lose Kid!");
   }
+
+  gamesYouWin = 0;
+  gamesYouLose = 0;
 }
 
-console.log(game());
+var gameStart = true;
+while (gameStart) {
+  game();
+
+  alert("Do you want to replay the game? yes or no :");
+  let replay = prompt("");
+  if (replay === "no") {
+    gameStart = false;
+  }
+}
+
+// console.log(game());
