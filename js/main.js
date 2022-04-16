@@ -48,11 +48,11 @@ function game() {
   }
 
   if (gamesYouWin === gamesYouLose) {
-    console.log("Draw!!!");
+    console.log("Draw!!!");document.getElementById("winner").innerHTML = "Draw!!!";
   } else if (gamesYouWin > gamesYouLose) {
-    console.log("You Win the whole game!");
+    console.log("You Win the whole game!");document.getElementById("winner").innerHTML = "You Win the whole game!";
   } else {
-    console.log("You Lose Kid!");
+    console.log("You Lose Kid!");document.getElementById("winner").innerHTML = "You Lose Kid!!!";
   }
 
   gamesYouWin = 0;
