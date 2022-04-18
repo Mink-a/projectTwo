@@ -8,13 +8,13 @@ function computerPlay() {
 
 // console.log(computerPlay())
 
-var gamesYouWin = 0;
-var gamesYouLose = 0;
+var yourScore = 0;
+var computerScore = 0;
 
 function playRound(playerSection, computerSection) {
   if (playerSection === computerSection) {
     console.log(
-      "You Win " + gamesYouWin + " : " + "Computer Win " + gamesYouLose
+      "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
     return `Draw! ${playerSection} and ${computerSection} are the same`;
   } else if (
@@ -22,15 +22,15 @@ function playRound(playerSection, computerSection) {
     (playerSection === "paper" && computerSection === "rock") ||
     (playerSection === "scissors" && computerSection === "paper")
   ) {
-    gamesYouWin++;
+    yourScore++;
     console.log(
-      "You Win " + gamesYouWin + " : " + "Computer Win " + gamesYouLose
+      "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
     return `You Win! ${playerSection} beats ${computerSection}`;
   } else {
-    gamesYouLose++;
+    computerScore++;
     console.log(
-      "You Win " + gamesYouWin + " : " + "Computer Win " + gamesYouLose
+      "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
     return `You Lose! ${computerSection} beats ${playerSection}`;
   }
@@ -40,34 +40,58 @@ function playRound(playerSection, computerSection) {
 //   playRound(prompt("Enter your move: ").toLowerCase(), computerPlay())
 // );
 
+const buttons = document.querySelectorAll(".selection button");
+
+// Random rock paper scissor for the computer and clicked ones for the player
+
 function game() {
-  for (let games = 0; games < 5; games++) {
-    console.log(
-      playRound(prompt("Enter your move: ").toLowerCase(), computerPlay())
-    );
-  }
+  buttons.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let clickedBtn = e.target.id;
 
-  if (gamesYouWin === gamesYouLose) {
-    console.log("Draw!!!");document.getElementById("winner").innerHTML = "Draw!!!";
-  } else if (gamesYouWin > gamesYouLose) {
-    console.log("You Win the whole game!");document.getElementById("winner").innerHTML = "You Win the whole game!";
-  } else {
-    console.log("You Lose Kid!");document.getElementById("winner").innerHTML = "You Lose Kid!!!";
-  }
-
-  gamesYouWin = 0;
-  gamesYouLose = 0;
+      console.log(playRound(clickedBtn, computerPlay()));
+      if (checkWinner()) {
+        yourScore = computerScore = 0;
+      }
+    });
+  });
 }
 
-var gameStart = true;
-while (gameStart) {
-  game();
-
-  alert("Do you want to replay the game? yes or no :");
-  let replay = prompt("");
-  if (replay === "no") {
-    gameStart = false;
+function checkWinner() {
+  if (yourScore === 5 || computerScore === 5) {
+    const winner =
+      yourScore === 5
+        ? "You win the game! Congratulations!"
+        : "Computer wins the game! Try again next time!";
+    console.log(winner);
+    document.getElementById("winner").innerHTML = winner;
+    return true;
   }
+  return false;
 }
+
+// if (yourScore === computerScore) {
+//   console.log("Draw!!!");
+//   document.getElementById("winner").innerHTML = "Draw!!!";
+// } else if (yourScore ===5) {
+//   console.log("You Win the whole game!");
+//   document.getElementById("winner").innerHTML = "You Win the whole game!";
+// } else {
+//   console.log("You Lose Kid!");
+//   document.getElementById("winner").innerHTML = "You Lose Kid!!!";
+// }
+
+game();
+
+// var gameStart = true;
+// while (gameStart) {
+//   game();
+
+//   alert("Do you want to replay the game? yes or no :");
+//   let replay = prompt("");
+//   if (replay === "no") {
+//     gameStart = false;
+//   }
+// }
 
 // console.log(game());
