@@ -16,6 +16,10 @@ function playRound(playerSection, computerSection) {
     document.getElementById("p-score").textContent = yourScore;
     document.getElementById("c-score").textContent = computerScore;
 
+    document.getElementById(
+      "choices"
+    ).innerHTML = `Draw! ${playerSection} and ${computerSection} are the same`;
+
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
@@ -28,6 +32,11 @@ function playRound(playerSection, computerSection) {
     yourScore++;
     document.getElementById("p-score").textContent = yourScore;
     document.getElementById("c-score").textContent = computerScore;
+
+    document.getElementById(
+      "choices"
+    ).innerHTML = `You Win! ${playerSection} beats ${computerSection}`;
+
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
@@ -36,6 +45,11 @@ function playRound(playerSection, computerSection) {
     computerScore++;
     document.getElementById("p-score").textContent = yourScore;
     document.getElementById("c-score").textContent = computerScore;
+
+    document.getElementById(
+      "choices"
+    ).innerHTML = `You Lose! ${computerSection} beats ${playerSection}`;
+
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
@@ -58,11 +72,12 @@ function game() {
 
       console.log(playRound(clickedBtn, computerPlay()));
       if (checkWinner()) {
-        yourScore = computerScore = 0;
         updateScore();
       }
     });
   });
+
+  restartButton();
 }
 
 function updateScore() {
@@ -72,6 +87,7 @@ function updateScore() {
 
 function checkWinner() {
   if (yourScore === 5 || computerScore === 5) {
+    disableButton();
     const winner =
       yourScore === 5
         ? "You win the game! Congratulations!"
@@ -81,6 +97,28 @@ function checkWinner() {
     return true;
   }
   return false;
+}
+
+function restartButton() {
+  let btn = document.createElement("button");
+  btn.innerHTML = "Restart";
+  btn.onclick = function () {
+    buttons.forEach((btn) => {
+      btn.disabled = false;
+    });
+    document.getElementById("winner").innerHTML = "";
+    document.getElementById("choices").innerHTML = "";
+    yourScore = computerScore = 0;
+    updateScore();
+  };
+  document.body.appendChild(btn);
+}
+
+function disableButton() {
+  // Select the element with id "theButton" and disable it
+  buttons.forEach((btn) => {
+    btn.disabled = true;
+  });
 }
 
 // if (yourScore === computerScore) {
