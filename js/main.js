@@ -13,6 +13,9 @@ var computerScore = 0;
 
 function playRound(playerSection, computerSection) {
   if (playerSection === computerSection) {
+    document.getElementById("p-score").textContent = yourScore;
+    document.getElementById("c-score").textContent = computerScore;
+
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
@@ -23,12 +26,16 @@ function playRound(playerSection, computerSection) {
     (playerSection === "scissors" && computerSection === "paper")
   ) {
     yourScore++;
+    document.getElementById("p-score").textContent = yourScore;
+    document.getElementById("c-score").textContent = computerScore;
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
     return `You Win! ${playerSection} beats ${computerSection}`;
   } else {
     computerScore++;
+    document.getElementById("p-score").textContent = yourScore;
+    document.getElementById("c-score").textContent = computerScore;
     console.log(
       "You Win " + yourScore + " : " + "Computer Win " + computerScore
     );
@@ -52,9 +59,15 @@ function game() {
       console.log(playRound(clickedBtn, computerPlay()));
       if (checkWinner()) {
         yourScore = computerScore = 0;
+        updateScore();
       }
     });
   });
+}
+
+function updateScore() {
+  document.getElementById("p-score").textContent = yourScore;
+  document.getElementById("c-score").textContent = computerScore;
 }
 
 function checkWinner() {
