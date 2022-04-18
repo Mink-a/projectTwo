@@ -6,7 +6,7 @@ function computerPlay() {
   return String(choices[Math.floor(Math.random() * 3)]);
 }
 
-// console.log(computerPlay())
+
 
 var yourScore = 0;
 var computerScore = 0;
@@ -20,9 +20,7 @@ function playRound(playerSection, computerSection) {
       "choices"
     ).innerHTML = `Draw! ${playerSection} and ${computerSection} are the same`;
 
-    console.log(
-      "You Win " + yourScore + " : " + "Computer Win " + computerScore
-    );
+    
     return `Draw! ${playerSection} and ${computerSection} are the same`;
   } else if (
     (playerSection === "rock" && computerSection === "scissors") ||
@@ -37,9 +35,7 @@ function playRound(playerSection, computerSection) {
       "choices"
     ).innerHTML = `You Win! ${playerSection} beats ${computerSection}`;
 
-    console.log(
-      "You Win " + yourScore + " : " + "Computer Win " + computerScore
-    );
+    
     return `You Win! ${playerSection} beats ${computerSection}`;
   } else {
     computerScore++;
@@ -50,27 +46,23 @@ function playRound(playerSection, computerSection) {
       "choices"
     ).innerHTML = `You Lose! ${computerSection} beats ${playerSection}`;
 
-    console.log(
-      "You Win " + yourScore + " : " + "Computer Win " + computerScore
-    );
+    
     return `You Lose! ${computerSection} beats ${playerSection}`;
   }
 }
 
-// console.log(
-//   playRound(prompt("Enter your move: ").toLowerCase(), computerPlay())
-// );
+
 
 const buttons = document.querySelectorAll(".selection button");
 
-// Random rock paper scissor for the computer and clicked ones for the player
+
 
 function game() {
   buttons.forEach((btn) => {
     btn.addEventListener("click", (e) => {
       let clickedBtn = e.target.id;
 
-      console.log(playRound(clickedBtn, computerPlay()));
+      playRound(clickedBtn, computerPlay());
       if (checkWinner()) {
         updateScore();
       }
@@ -92,7 +84,7 @@ function checkWinner() {
       yourScore === 5
         ? "You win the game! Congratulations!"
         : "Computer wins the game! Try again next time!";
-    console.log(winner);
+    
     document.getElementById("winner").innerHTML = winner;
     return true;
   }
